@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -10,25 +9,13 @@ namespace MyFirstProject.Data.Contexts
 {
     public class MyFirstProjectContext : DbContext, IUnitOfWork
     {
-        // public MyFirstProjectContext(DbContextOptions<MyFirstProjectContext> options)
-        //     : base(options)
-        // {
+        public MyFirstProjectContext(DbContextOptions<MyFirstProjectContext> options)
+            : base(options)
+        {
 
-        // }
+        }
 
         public DbSet<User> User { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseSqlServer("Server=127.0.0.1,1433;Database=MyFirstProject;User Id=SA;Password=Abc123!@#;MultipleActiveResultSets=true",
-                //Data source=127.0.0.1,1433;Database=MyFirstProject;Integrated Security=False;User ID=SA;Password=Abc123!@#;MultipleActiveResultSets=True
-                p => p.EnableRetryOnFailure( // RETRY EM CASO DE FALHA DE CONEXAO
-                     maxRetryCount: 2, // QTD DE TENTATIVAS
-                     maxRetryDelay: TimeSpan.FromSeconds(5), // QTD SEGUNDOS PARA A PROXIMA TENTATIVA
-                     errorNumbersToAdd: null) // ERROS ADICIONAIS (DEIXADO O PADRAO NULL)
-                     .MigrationsHistoryTable("migration-history")); // ALTERANDO NOME DA TABELA DE MIGRAÇÃO
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -30,9 +30,6 @@ namespace MyFirstProject.Infra.IoC
 
             // Queries
             services.AddScoped<IUserQueries, UserQueries>();
-
-            // DbContext
-            services.AddScoped<MyFirstProjectContext>();
         }
     }
 }

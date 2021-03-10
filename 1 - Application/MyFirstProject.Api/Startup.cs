@@ -32,16 +32,14 @@ namespace MyFirstProject.Api
             // SERVICOS DA API
             services.WebApiConfig();
 
-            services.AddDbContext<MyFirstProjectContext>();
-
-            // services.AddDbContext<MyFirstProjectContext>(options =>
-            //     options.UseSqlServer(
-            //         Configuration.GetConnectionString("MyFirstProjectDbBase"),
-            //          c => c.EnableRetryOnFailure( // RETRY EM CASO DE FALHA DE CONEXAO
-            //          maxRetryCount: 2, // QTD DE TENTATIVAS
-            //          maxRetryDelay: TimeSpan.FromSeconds(5), // QTD SEGUNDOS PARA A PROXIMA TENTATIVA
-            //          errorNumbersToAdd: null) // ERROS ADICIONAIS (DEIXADO O PADRAO NULL)
-            //          .MigrationsHistoryTable("migration-history"))); // ALTERANDO NOME DA TABELA DE MIGRAÇÃO));
+            services.AddDbContext<MyFirstProjectContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("MyFirstProjectDbBase"),
+                     c => c.EnableRetryOnFailure( // RETRY EM CASO DE FALHA DE CONEXAO
+                     maxRetryCount: 2, // QTD DE TENTATIVAS
+                     maxRetryDelay: TimeSpan.FromSeconds(5), // QTD SEGUNDOS PARA A PROXIMA TENTATIVA
+                     errorNumbersToAdd: null) // ERROS ADICIONAIS (DEIXADO O PADRAO NULL)
+                     .MigrationsHistoryTable("migration-history"))); // ALTERANDO NOME DA TABELA DE MIGRAÇÃO));
 
             services.RegisterServices();
 
